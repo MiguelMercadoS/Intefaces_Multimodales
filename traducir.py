@@ -17,7 +17,7 @@ st.subheader("Leer y traducir desde texto.")
 st.write('Usa el aplicativo cuando quieras decir algo en un idioma que no hables')
 source_lang = "es"  # Lenguaje de origen (puedes cambiarlo según tus necesidades)
 translator = Translator()
-text = st.text_input("Ingrese el texto:")
+text = st.text_input("Escribe el texto que quieres traducir aquí:")
 
 # Lista de idiomas de destino
 languages = {
@@ -28,7 +28,7 @@ languages = {
     "Chino Mandarín": "zh-cn", 
 }
 # Widget para seleccionar el idioma de destino
-target_lang = st.selectbox("Seleccione el idioma de destino:", list(languages.keys()))
+target_lang = st.selectbox("¿En cual idioma quieres traducirlo?:", list(languages.keys()))
 def text_to_speech(text, tld):
     tts = gTTS(text, lang=tld, slow=False)
     try:
