@@ -21,8 +21,10 @@ text = st.text_input("Escribe el texto que quieres traducir aquí:")
 
 # Lista de idiomas de destino
 languages = {
+    "Alemán": "de",
     "Español": "es",
     "Inglés": "en",
+    "Portugués": "pr",
     "Francés": "fr",
     "Ruso": "ru",
     "Chino Mandarín": "zh-cn", 
