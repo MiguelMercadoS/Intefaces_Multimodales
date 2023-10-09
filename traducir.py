@@ -6,7 +6,7 @@ import os
  
 
 st.title("Traductor")
-image = Image.open('translate.png')
+image = Image.open('traductor.jpg')
 st.image(image, width=300)
 try:
     os.mkdir("temp")
