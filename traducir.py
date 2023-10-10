@@ -12,16 +12,16 @@ st.title("Traducción óptica")
 image1 = Image.open('fotoimg.jpg')
 st.image(image1)
 
-img_file_buffer = st.camera_input("Toma una foto:")
+img_file_buffer = st.camera_input("Captura el texto que quieres traducir:")
 
 with st.sidebar:
-    filtro = st.radio("Aplicar Filtro", ('Con Filtro', 'Sin Filtro'))
+    filtro = st.radio("Aplicar Filtro", ('Filtro Activado', 'Filtro Desactivado'))
 
 if img_file_buffer is not None:
     bytes_data = img_file_buffer.read()
     cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
 
-    if filtro == 'Con Filtro':
+    if filtro == 'Filtro Activado':
         cv2_img = cv2.bitwise_not(cv2_img)
 
     img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
@@ -30,13 +30,13 @@ if img_file_buffer is not None:
 
     if text:
         try:
-            audio = gTTS(text=text, lang='es')  # Cambia 'es' al idioma que desees
+            audio = gTTS(text=text, lang='es') 
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
                 audio.save(temp_audio_file.name)
                 audio_path = temp_audio_file.name
                 st.audio(audio_path, format="audio/mp3")
         except Exception as e:
-            st.error("Ocurrió un error al generar o reproducir el audio.")
+            st.error("No se pudo reproducir el audio con la traducción.")
 
 # ------------------------------------------------------------------
 st.title("Traductor")
