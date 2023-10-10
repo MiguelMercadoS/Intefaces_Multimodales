@@ -10,7 +10,7 @@ Original file is located at
 """
 
 #!sudo apt-get install tesseract-ocr
-!pip install pytesseract
+#!pip install pytesseract
 
 """#Cargamos la imagen"""
 
