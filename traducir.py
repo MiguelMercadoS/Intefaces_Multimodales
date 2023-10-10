@@ -9,12 +9,10 @@ from PIL import Image
 import os
 
 st.title("Traducción óptica")
-
-# Imagen de ejemplo
 image1 = Image.open('fotoimg.jpg')
 st.image(image1)
 
-img_file_buffer = st.file_uploader("Toma una foto:")
+img_file_buffer = st.camera_input("Toma una foto:")
 
 with st.sidebar:
     filtro = st.radio("Aplicar Filtro", ('Con Filtro', 'Sin Filtro'))
