@@ -8,7 +8,7 @@ from googletrans import Translator
 from PIL import Image
 import os
 
-st.title("Reconocimiento óptico de Caracteres")
+st.title("Traducción óptica")
 
 # Imagen de ejemplo
 image1 = Image.open('traductor.jpg')
