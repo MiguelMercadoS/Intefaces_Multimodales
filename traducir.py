@@ -8,42 +8,51 @@ from googletrans import Translator
 from PIL import Image
 import os
 
-st.title("Reconocimiento optico de Caracteres" )
+st.title("Reconocimiento óptico de Caracteres")
+
+# Imagen de ejemplo
 image1 = Image.open('traductor.jpg')
-st.image（image1）
-img_file_buffer = st.camera_input("Toma una Foto" )
+st.image(image1)
+
+img_file_buffer = st.file_uploader("Toma una foto:")
+
 with st.sidebar:
- filtro = st.radio("Aplicar Filtro", ('Con Filtro', 'Sin Filtro'))
+    filtro = st.radio("Aplicar Filtro", ('Con Filtro', 'Sin Filtro'))
+
 if img_file_buffer is not None:
-bytes_data = img_file_buffer.getvalue()
-cv2_img = cv2.imdecode (np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
-if filtro == 'Con Filtro':
-cv2_img=cv2.bitwise_not(cv2_img)
-else:
-cv2_img= cv2_img
-img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
-text=pytesseract.image_to_string(img_rgb)
-st.write (text)
-if text：
-try:
-audio = gTTS(text=text, lang='es') # Cambia 'es' al idioma que desees
-with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
-audio.save (temp_audio_file.name)
-audio_path = temp_audio_file.name
-		st.audio(audio_path, format="audio/mp3")
-	except Exception as e:
-	st.error("Ocurrio un error al generar o reproducir el audio. ")
-#__________________________________________________________________________________
+    bytes_data = img_file_buffer.read()
+    cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
+
+    if filtro == 'Con Filtro':
+        cv2_img = cv2.bitwise_not(cv2_img)
+
+    img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
+    text = pytesseract.image_to_string(img_rgb)
+    st.write(text)
+
+    if text:
+        try:
+            audio = gTTS(text=text, lang='es')  # Cambia 'es' al idioma que desees
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
+                audio.save(temp_audio_file.name)
+                audio_path = temp_audio_file.name
+                st.audio(audio_path, format="audio/mp3")
+        except Exception as e:
+            st.error("Ocurrió un error al generar o reproducir el audio.")
+
+# ------------------------------------------------------------------
 st.title("Traductor")
 image = Image.open('traductor.jpg')
 st.image(image, width=300)
+
 try:
     os.mkdir("temp")
 except:
     pass
-st.subheader("Leer y traducir desde texto.")
 
-st.write('Usa el aplicativo cuando quieras decir algo en un idioma que no hables')
+st.subheader("Leer y traducir desde texto.")
+st.write('Usa la aplicación cuando quieras decir algo en un idioma que no hables')
+
 source_lang = "es"  # Lenguaje de origen (puedes cambiarlo según tus necesidades)
 translator = Translator()
 text = st.text_input("Escribe el texto que quieres traducir aquí:")
@@ -56,10 +65,13 @@ languages = {
     "Portugués": "pr",
     "Francés": "fr",
     "Ruso": "ru",
-    "Chino Mandarín": "zh-cn", 
+    "Chino Mandarín": "zh-cn",
 }
+
 # Widget para seleccionar el idioma de destino
-target_lang = st.selectbox("¿En cual idioma quieres traducirlo?:", list(languages.keys()))
+target_lang = st.selectbox("¿En cuál idioma quieres traducirlo?:", list(languages.keys()))
+
+
 def text_to_speech(text, tld):
     tts = gTTS(text, lang=tld, slow=False)
     try:
@@ -68,6 +80,8 @@ def text_to_speech(text, tld):
         my_file_name = "audio"
     tts.save(f"temp/{my_file_name}.mp3")
     return my_file_name, text
+
+
 if text and target_lang:
     target_lang_code = languages[target_lang]
     translated_text = translator.translate(text, src=source_lang, dest=target_lang_code).text
@@ -82,5 +96,6 @@ if text and target_lang:
     st.audio(audio_bytes, format="audio/mp3", start_time=0)
     st.markdown(f"## Texto en audio:")
     st.write(f" {output_text}")
-image2 = Image.open('traducir.jpg')
+
+image2 = Image.open('traductor.jpg')
 st.image(image2, width=250)
