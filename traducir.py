@@ -95,6 +95,3 @@ if text and target_lang:
     st.audio(audio_bytes, format="audio/mp3", start_time=0)
     st.markdown(f"## Texto en audio:")
     st.write(f" {output_text}")
-
-image2 = Image.open('traductor.jpg')
-st.image(image2, width=250)
