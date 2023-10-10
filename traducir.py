@@ -11,50 +11,31 @@ from PIL import Image
 import os
 
 st.title("Reconocimiento optico de Caracteres" )
-
-imagel = Image.open('ocr.jpg')
-
+image1 = Image.open('traductor.jpg')
 st.image（image1）
-
 img_file_buffer = st.camera_input("Toma una Foto" )
-
 with st.sidebar:
-
  filtro = st.radio("Aplicar Filtro", ('Con Filtro', 'Sin Filtro'))
-
 if img_file_buffer is not None:
-
-
 bytes_data = img_file_buffer.getvalue()
-
 cv2_img = cv2.indecode (np. frombuffer(bytes_data, np.uint8), Cv2. IMREAD_COLOR)
-
 if filtro = 'Con Filtro':
-	cv2_img=cv2.bitwise_not(cv2_img)
+cv2_img=cv2.bitwise_not(cv2_img)
 else:
 cv2_img= cv2_img
-
-
 img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
-
 text=pytesseract.image_to_string(img_rgb)
-
 st.write (text)
-
 if text：
 try:
-	audio = gTTS(text=text, lang='es') # Cambia 'es' al idioma que desees
-	with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
-	audio.save (temp_audio_file. name)
-	audio_path = temp_audio_file.name
-
+audio = gTTS(text=text, lang='es') # Cambia 'es' al idioma que desees
+with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
+audio.save (temp_audio_file. name)
+audio_path = temp_audio_file.name
 		st. audio(audio_path, format="audio/mp3")
 	except Exception as e:
 	st.error("Ocurrio un error al generar o reproducir el audio. ")
-
-
- 
-
+#__________________________________________________________________________________
 st.title("Traductor")
 image = Image.open('traductor.jpg')
 st.image(image, width=300)
