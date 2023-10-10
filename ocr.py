@@ -9,7 +9,7 @@ Original file is located at
 #Instalamos las dependencias necesarias
 """
 
-!sudo apt-get install tesseract-ocr
+#!sudo apt-get install tesseract-ocr
 !pip install pytesseract
 
 """#Cargamos la imagen"""
