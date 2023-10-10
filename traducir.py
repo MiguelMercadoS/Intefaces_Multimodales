@@ -18,7 +18,7 @@ with st.sidebar:
     filtro = st.radio("Aplicar Filtro", ('Filtro Activado', 'Filtro Desactivado'))
 
 if img_file_buffer is not None:
-    bytes_data = img_file_buffer.read()
+    bytes_data = img_file_buffer.getValue()
     cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
 
     if filtro == 'Filtro Activado':
