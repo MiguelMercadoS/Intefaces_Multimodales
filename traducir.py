@@ -1,12 +1,10 @@
 import streamlit as st
-from PIL import Image
 import cv2
 import numpy as np
 import pytesseract
 from gtts import gTTS
 import tempfile
 from googletrans import Translator
-from gtts import gTTS
 from PIL import Image
 import os
 
