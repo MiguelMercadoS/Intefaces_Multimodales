@@ -2,7 +2,7 @@ streamlit
 streamlit-webrtc
 numpy >=1.16
 opencv-python-headless
-pytesseract
+pytesseract>=0.3.8
 gTTS==2.2.2
 googletrans==3.1.0a0
 
