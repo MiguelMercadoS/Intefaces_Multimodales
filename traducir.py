@@ -11,7 +11,7 @@ import os
 st.title("Traducción óptica")
 
 # Imagen de ejemplo
-image1 = Image.open('traductor.jpg')
+image1 = Image.open('fotoimg.jpg')
 st.image(image1)
 
 img_file_buffer = st.file_uploader("Toma una foto:")
